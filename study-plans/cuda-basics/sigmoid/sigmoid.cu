@@ -4,8 +4,9 @@
 __global__ void sigmoid_kernel(const float* input, float* output, int N) {
     // Write code here
     int idx = (blockDim.x * blockIdx.x) + threadIdx.x;
-    if(idx<N){
-        output[idx] = 1/(1+expf(-input[idx]));
+    int stride = blockDim.x * gridDim.x;
+    for(int loop_idx = idx; loop_idx < N; loop_idx+=stride){
+        output[loop_idx] = 1/(1+expf(-input[loop_idx]));   
     }
 }
 
