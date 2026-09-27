@@ -6,7 +6,7 @@ __global__ void tanh_kernel(const float* input, float* output, int N) {
     int idx = (blockIdx.x * blockDim.x) + threadIdx.x;
     int stride = blockDim.x * gridDim.x;
     for(int xi = idx; xi< N;xi+=stride){
-        output[xi] = (expf(input[xi])-expf(-input[xi]))/(expf(input[xi])+expf(-input[xi]));
+        output[xi] = tanhf(input[xi]);
     }
 }
 
